@@ -1,16 +1,27 @@
 /*
     SETUP
 */
+
+// Express
 var express = require('express');
 var app = express();
 PORT = 50123;
+
+// Database
+var db = require('./database/db-connector');
+
+// Handlebars
+const { engine } = require('express-handlebars');
+var exphbs = require('express-handlebars');     // Import express-handlebars
+app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
+app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 
 /*
     ROUTES
 */
 app.get('/', function(req, res)
     {
-        res.send("The server is running!")
+        res.render('index');
     });
 
 /*
