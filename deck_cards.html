@@ -1,0 +1,102 @@
+<html>
+<head>
+<title>Deck Cards</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript">
+		function showform(option) {
+			/*
+			* Show the corresponding div and hide all others
+			*/
+			if (option == 'insert'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'block';
+			}
+			else { //by default display browse
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'none';
+			}
+		}
+    function newDeckCard() { showform('insert'); }
+    function browseDeckCards() { showform ('browse'); }
+</script>
+</head>
+
+<body onload="browseDeckCards()">
+<h1>Deck Cards</h1>
+
+[ <a href="index.html">Home</a> | <a href="players.html">Players</a> | <a href="matches.html">Matches</a> | <a href="decks.html">Decks</a> | <a href="cards.html">Cards</a> | <a href="deck_cards.html">Deck_Cards</a> ]
+
+<div id="browse">
+<!-- Make this a button?-->
+<p><a href="#" onClick="newDeckCard()">New Deck Card(s)</a></p>
+<p>
+    <label> Filter by Deck ID: </label> <select name="FilterByDeckID">
+        <option value="0" selected>Select a DeckID...</option>
+        <option value="1">1 - Larvene37</option>
+        <option value="2">2 - DistanceShock</option>
+        <option value="3">3 - DistanceShock</option>
+        <option value="4">4 - Reqaz1a</option>
+    </select>
+</p>
+<table border="1" cellpadding="5">
+  <tr>
+    <th>DeckID</th>
+    <th>Card Name</th>
+    <th>Quantity</th>
+  </tr>
+  <tr>
+    <td align="right">1</td>
+    <td>Spiky Boy</td>
+    <td align="right">3</td>
+  </tr>
+  <tr>
+    <td align="right">1</td>
+    <td>Bat</td>
+    <td align="right">1</td>
+  </tr>
+  <tr>
+    <td align="right">2</td>
+    <td>Skeleton</td>
+    <td align="right">2</td>
+  </tr>
+  <tr>
+    <td align="right">2</td>
+    <td>Sear Sword</td>
+    <td align="right">1</td>
+  </tr>
+  <tr>
+    <td align="right">3</td>
+    <td>Bat</td>
+    <td align="right">4</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</div> <!-- browse -->
+<div id="insert">
+    <form method="POST" id="addDeck">
+      <p></p>
+        <legend><strong>Add Deck</strong></legend>
+          <fieldset class="fields">
+            <label>Deck ID: </label> <select name="DeckID">
+                <option value="0" selected>Select a DeckID...</option>
+                <option value="1">1 - Larvene37</option>
+                <option value="2">2 - DistanceShock</option>
+                <option value="3">3 - DistanceShock</option>
+                <option value="4">4 - Reqaz1a</option>
+            </select>
+            <label>Card ID: </label> <select name="CardID">
+                <option value="0" selected>Select a CardID...</option>
+                <option value="1">1 - Spiky Boy</option>
+                <option value="2">2 - Bat</option>
+                <option value="3">3 - Sear Sword</option>
+                <option value="4">4 - Skeleton</option>
+            </select>
+            <label> Quantity </label> <input type="number" name="Quantity" value="0" min="0">
+      </fieldset>
+          <input class="btn" type="submit" id="addDeck" value="Add Deck">
+          <input class="btn" type="button" value="cancel" onClick="browseDeckCards()">
+	</form> 
+</div><!-- insert -->
+
+</body>
+</html>

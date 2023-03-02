@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>Players</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript">
+		function showform(option) {
+			/*
+			* Show the corresponding div and hide all others
+			*/
+			if (option == 'insert'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'block';
+			}
+			else { //by default display browse
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'none';
+			}
+		}
+    function newPlayer() { showform('insert'); }
+    function browsePlayers() { showform ('browse'); }
+</script>
+</head>
+
+<body onload="browsePlayers()">
+<h1>Players</h1>
+
+[ <a href="index.html">Home</a> | <a href="players.html">Players</a> | <a href="matches.html">Matches</a> | <a href="decks.html">Decks</a> | <a href="cards.html">Cards</a> | <a href="deck_cards.html">Deck_Cards</a> ]
+
+<div id="browse">
+<!-- Make this a button?-->
+<p><a href="#" onClick="newPlayer()">New Player</a></p>
+<table border="1" cellpadding="5">
+  <tr>
+    <th>PlayerID</th>
+    <th>Username</th>
+  </tr>
+  <tr>
+    <td align="right">1</td>
+    <td >Larvene37</td>
+  </tr>
+  <tr>
+    <td align="right">2</td>
+    <td>DistanceShock</td>
+  </tr>
+  <tr>
+    <td align="right">3</td>
+    <td>Voidance</td>
+  </tr>
+  <tr>
+    <td align="right">4</td>
+    <td>Reqaz1a</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</div> <!-- browse -->
+<div id="insert">
+    <form method="POST" id="addPlayer">
+      <p></p>
+        <legend><strong>Add Player</strong></legend>
+          <fieldset class="fields">
+            <label> Username </label> <input type="text" name="Username">
+      </fieldset>
+          <input class="btn" type="submit" id="addPlayer" value="Add Player">
+          <input class="btn" type="button" value="cancel" onClick="browsePlayers()">
+	</form> 
+</div><!-- insert -->
+
+</body>
+</html>

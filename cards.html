@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>Cards</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript">
+		function showform(option) {
+			/*
+			* Show the corresponding div and hide all others
+			*/
+			if (option == 'insert'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'block';
+			}
+			else { //by default display browse
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'none';
+			}
+		}
+    function newCard() { showform('insert'); }
+    function browseCards() { showform ('browse'); }
+</script>
+</head>
+
+<body onload="browseCards()">
+<h1>Cards</h1>
+
+[ <a href="index.html">Home</a> | <a href="players.html">Players</a> | <a href="matches.html">Matches</a> | <a href="decks.html">Decks</a> | <a href="cards.html">Cards</a> | <a href="deck_cards.html">Deck_Cards</a> ]
+
+<div id="browse">
+<!-- Make this a button?-->
+<p> <a href="#" onClick="newCard()">New Card</a> </p>
+<table border="1" cellpadding="5">
+  <tr>
+    <th>CardID</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Power</th>
+    <th>Health</th>
+    <th>SpawnCost</th>
+  </tr>
+  <tr>
+    <td align="right" >1</td>
+    <td >Spiky Boy</td>
+    <td>When this card is attacked, deal 1 damage to the attacker</td>
+    <td align="right">1</td>
+    <td align="right">2</td>
+    <td align="right">1</td>
+  </tr>
+  <tr>
+    <td align="right" >2</td>
+    <td >Bat</td>
+    <td>When this card is attacked, damage is instead dealt to the player</td>
+    <td align="right">2</td>
+    <td align="right">2</td>
+    <td align="right">3</td>
+  </tr>
+  <tr>
+    <td align="right" >3</td>
+    <td >Sear Sword</td>
+    <td></td>
+    <td align="right">2</td>
+    <td align="right">2</td>
+    <td align="right">2</td>
+  </tr>
+  <tr>
+    <td align="right" >4</td>
+    <td >Skeleton</td>
+    <td>When this card is defeated, flip a coin. If the coin lands heads, return the card to your hand</td>
+    <td align="right">1</td>
+    <td align="right">2</td>
+    <td align="right">1</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</div> <!-- browse -->
+<div id="insert">
+    <form method="POST" id="addCard">
+        <p></p>
+        <legend><strong>Add Card</strong></legend>
+          <fieldset class="fields">
+            <label> Name </label> <input type="text" name="Name">
+            <label> Description </label> <input type="text" name="Description"> </br>
+            <label> Power </label> <input type="text" name="Power">
+            <label> Health </label> <input type="text" name="Health">
+            <label> SpawnCost </label> <input type="text" name="SpawnCost">
+      </fieldset>
+          <input class="btn" type="submit" id="addCard" value="Add Card">
+          <input class="btn" type="button" value="cancel" onClick="browseCards()">
+	</form> 
+</div><!-- insert -->
+
+</body>
+</html>

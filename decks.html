@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>Decks</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript">
+		function showform(option) {
+			/*
+			* Show the corresponding div and hide all others
+			*/
+			if (option == 'insert'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (option == 'delete'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('delete').style.display = 'block';
+			}
+			else { //by default display browse
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+		}
+    function newDeck() { showform('insert'); }
+    function deleteDeck(did) { showform ('delete'); }
+    function browseDecks() { showform ('browse'); }
+    // Function to disable the add deck button if a PlayerID is not selected in the add Deck menu
+    function checkAddDeck() {
+      // Get the dropdown menu and "Add Deck" button from the new deck form
+      var selection = document.getElementById('playerIDSelect').value;
+      var button = document.getElementById('addDeck')
+      // If the "Select a player..." option (value 0) is selected, disable the button
+      if(selection == "0") {
+        button.disabled = true;
+      }
+    }
+</script>
+</head>
+
+<body onload="browseDecks()">
+<h1>Decks</h1>
+
+[ <a href="index.html">Home</a> | <a href="players.html">Players</a> | <a href="matches.html">Matches</a> | <a href="decks.html">Decks</a> | <a href="cards.html">Cards</a> | <a href="deck_cards.html">Deck_Cards</a> ]
+
+<div id="browse">
+<!-- Make this a button?-->
+<p><a href="#" onClick="newDeck()">New Deck</a></p>
+<table border="1" cellpadding="5">
+  <tr>
+    <th></th>
+    <th>DeckID</th>
+    <th>Player Username</th>
+  </tr>
+  <tr>
+    <td><a href="#" onclick="deleteDeck('this.DeckID')">Delete</a></td>
+    <td align="right">1</td>
+    <td>Larvene37</td>
+  </tr>
+  <tr>
+    <td><a href="#" onclick="deleteDeck('this.DeckID')">Delete</a></td>
+    <td align="right">2</td>
+    <td>DistanceShock</td>
+  </tr>
+  <tr>
+    <td><a href="#" onclick="deleteDeck('this.DeckID')">Delete</a></td>
+    <td align="right">3</td>
+    <td>DistanceShock</td>
+  </tr>
+  <tr>
+    <td><a href="#" onclick="deleteDeck('this.DeckID')">Delete</a></td>
+    <td align="right">4</td>
+    <td>Reqaz1a</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</div> <!-- browse -->
+<div id="insert">
+    <form method="POST" id="addDeck">
+      <p></p>
+        <legend><strong>Add Deck</strong></legend>
+          <fieldset class="fields">
+            <label> Player ID </label> <select name="PlayerID" id="playerIDSelect" onchange="checkAddDeck()">
+            	<option value="0" selected>Select a player...</option>
+                <option value="1">1 - Larvene37</option>
+                <option value="2">2 - DistanceShock</option>
+                <option value="3">3 - Voidance</option>
+                <option value="4">4 - Reqaz1a</option>
+                </select>
+      </fieldset>
+          <input class="btn" type="submit" id="addDeck" value="Add Deck">
+          <input class="btn" type="button" value="cancel" onClick="browseDecks()">
+	</form> 
+</div><!-- insert -->
+<div id="delete" style="display: block">
+  <form method="POST" id="deleteDeck">
+    <p></p>
+      <legend><strong>Delete Deck</strong></legend>
+          <fieldset class="fields">
+          <p>Are you sure you wish to delete the following?</p>
+          <input type="hidden" name="DeckID" id="deleteDeckID" value="3">
+          <label><strong>DeckID:</strong></label> 3
+          <label><strong>Player Username:</strong></label> DistanceShock
+    </fieldset>
+    <input class="btn" type="submit" id="DeleteDeck" value="Delete Deck">
+          <input class="btn" type="button" value="cancel" onClick="browseDecks()">
+  </form> 
+</div><!-- delete -->
+
+</body>
+</html>
