@@ -27,6 +27,10 @@ app.get('/players', function(req, res)
     {
         res.render('players');
     });
+app.get('/decks', function(req, res)
+    {
+        res.render('decks')
+    })
 /*
     LISTENER
 */
