@@ -29,8 +29,13 @@ app.get('/players', function(req, res)
     });
 app.get('/decks', function(req, res)
     {
-        res.render('decks')
-    })
+        let query1 = "SELECT Decks.DeckID, Players.Username AS Player_Username FROM Decks INNER JOIN Players ON Decks.PlayerID = Players.PlayerID ORDER BY Decks.DeckID;"
+        
+        db.pool.query(query1, function(error, rows, fields)
+        {
+            res.render('decks', {data: rows});
+        });
+    });
 /*
     LISTENER
 */
