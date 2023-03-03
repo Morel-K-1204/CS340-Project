@@ -23,7 +23,10 @@ app.get('/', function(req, res)
     {
         res.render('index');
     });
-
+app.get('/players', function(req, res)
+    {
+        res.render('players');
+    });
 /*
     LISTENER
 */
