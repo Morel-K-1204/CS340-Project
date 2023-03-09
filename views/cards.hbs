@@ -1,0 +1,49 @@
+<h1>Cards</h1>
+
+[ <a href="/">Home</a> | <a href="/players">Players</a> | <a href="/matches">Matches</a> | <a href="/decks">Decks</a> | <a href="/cards">Cards</a> | <a href="/deck_cards">Deck_Cards</a> ]
+
+<div id="browse">
+<!-- Make this a button?-->
+<p> <a href="#" onClick="newCard()">New Card</a> </p>
+<table border="1" cellpadding="5">
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.CardID}}</td>
+            <td>{{this.Name}}</td>
+			<td>{{this.Description}}</td>
+			<td>{{this.Power}}</td>
+			<td>{{this.Health}}</td>
+			<td>{{this.SpawnCost}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<p>&nbsp;</p>
+</div> <!-- browse -->
+
+<div id="insert">
+    <form method="POST" id="addCard">
+        <p></p>
+        <legend><strong>Add Card</strong></legend>
+          <fieldset class="fields">
+            <label> Name </label> <input type="text" name="Name">
+            <label> Description </label> <input type="text" name="Description"> </br>
+            <label> Power </label> <input type="text" name="Power">
+            <label> Health </label> <input type="text" name="Health">
+            <label> SpawnCost </label> <input type="text" name="SpawnCost">
+      </fieldset>
+          <input class="btn" type="submit" id="addCard" value="Add Card">
+          <input class="btn" type="button" value="cancel" onClick="browseCards()">
+	</form> 
+</div><!-- insert -->
