@@ -134,7 +134,7 @@ app.post('/add-deck', function(req, res){
         }
         else
         {
-            res.redirect('/deck_cards');
+            res.redirect('/decks');
         }
     })
 })
