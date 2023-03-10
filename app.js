@@ -5,6 +5,9 @@
 // Express
 var express = require('express');
 var app = express();
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(express.static('public'))
 PORT = 50123;
 
 // Database
@@ -68,6 +71,24 @@ app.get('/deck_cards', function(req, res)
 			res.render('deck_cards', {data: rows});
         });
     });
+
+app.post('/add-card', function(req, res){
+    let data = req.body;
+	
+	
+	
+    query1 = `INSERT INTO Cards(Name, Description, Power, Health, SpawnCost) VALUES('${data['name-input']}', '${data['description-input']}', ${data['power-input']}, ${data['health-input']}, ${data['cost-input']});`;
+    db.pool.query(query1, function(error, rows, fields){
+        if (error) {
+			console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            res.redirect('/cards');
+        }
+    })
+})
 /*
     LISTENER
 */

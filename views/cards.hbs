@@ -33,17 +33,15 @@
 </div> <!-- browse -->
 
 <div id="insert">
-    <form method="POST" id="addCard">
+    <form method="POST" id="add-card-form" action="/add-card">
         <p></p>
         <legend><strong>Add Card</strong></legend>
-          <fieldset class="fields">
-            <label> Name </label> <input type="text" name="Name">
-            <label> Description </label> <input type="text" name="Description"> </br>
-            <label> Power </label> <input type="text" name="Power">
-            <label> Health </label> <input type="text" name="Health">
-            <label> SpawnCost </label> <input type="text" name="SpawnCost">
-      </fieldset>
-          <input class="btn" type="submit" id="addCard" value="Add Card">
-          <input class="btn" type="button" value="cancel" onClick="browseCards()">
+        <label> Name </label> <input type="text" name="name-input" id="name-input">
+        <label> Description </label> <input type="text" name="description-input" id="description-input"> </br>
+        <label> Power </label> <input type="number" name="power-input" id="power-input">
+        <label> Health </label> <input type="number" name="health-input" id="health-input">
+        <label> SpawnCost </label> <input type="number" name="cost-input" id="cost-input">
+        <input type="submit" id="add-card" value="Add Card">
+        <!-- <input class="btn" type="button" value="cancel" onClick="browseCards()"> -->
 	</form> 
 </div><!-- insert -->
