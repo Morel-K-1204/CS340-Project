@@ -44,17 +44,23 @@
                 </select>
             <label> Deck 1 ID </label> <select name="deck-1-id-input" id="deck-1-id-input">
             	<option value="NULL">&nbsp;</option>
-                <option value="1">1 - Larvene37</option>
+                {{!-- <option value="1">1 - Larvene37</option>
                 <option value="2">2 - DistanceShock</option>
                 <option value="3">3 - DistanceShock</option>
-                <option value="4">4 - Reqaz1a</option>
+                <option value="4">4 - Reqaz1a</option> --}}
+                {{#each decks}}
+                <option value="{{this.DeckID}}">{{this.DeckID}} - {{this.Player_Username}}</option>
+                {{/each}}
                 </select>
             <label> Deck 2 ID </label> <select name="deck-2-id-input" id="deck-2-id-input">
-                <option value="NULL">&nbsp;</option>
+                {{!-- <option value="NULL">&nbsp;</option>
                 <option value="1">1 - Larvene37</option>
                 <option value="2">2 - DistanceShock</option>
                 <option value="3">3 - DistanceShock</option>
-                <option value="4">4 - Reqaz1a</option>
+                <option value="4">4 - Reqaz1a</option> --}}
+                {{#each decks}}
+                <option value="{{this.DeckID}}">{{this.DeckID}} - {{this.Player_Username}}</option>
+                {{/each}}
                 </select>
       </fieldset>
           <input class="btn" type="submit" id="addMatch" value="Add Match">
