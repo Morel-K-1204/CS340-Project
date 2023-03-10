@@ -34,12 +34,13 @@
 </table>
 <p>&nbsp;</p>
 </div> <!-- browse -->
+
 <div id="insert">
-    <form method="POST" id="addDeck">
+    <form method="POST" id="addDeck" action="/add-deck">
       <p></p>
         <legend><strong>Add Deck</strong></legend>
           <fieldset class="fields">
-            <label> Player ID </label> <select name="PlayerID" id="playerIDSelect" onchange="checkAddDeck()">
+            <label> Player ID </label> <select name="PlayerID" id="player-input">
             	<option value="0" selected>Select a player...</option>
                 <option value="1">1 - Larvene37</option>
                 <option value="2">2 - DistanceShock</option>
@@ -51,6 +52,7 @@
           <input class="btn" type="button" value="cancel" onClick="browseDecks()">
 	</form> 
 </div><!-- insert -->
+
 <div id="delete" style="display: block">
   <form method="POST" id="deleteDeck">
     <p></p>

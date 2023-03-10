@@ -109,6 +109,22 @@ app.post('/add-player', function(req, res){
     })
 })
 
+app.post('/add-deck', function(req, res){
+    let data = req.body;
+	
+    query1 = `INSERT INTO Decks(PlayerID) VALUES (${data['player-input']});`
+    db.pool.query(query1, function(error, rows, fields){
+        if (error) {
+			console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            res.redirect('/deck_cards');
+        }
+    })
+})
+
 app.post('/add-deck-card', function(req, res){
     let data = req.body;
 	
