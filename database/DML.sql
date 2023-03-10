@@ -17,10 +17,10 @@ ORDER BY Decks.DeckID;
 SELECT Matches.MatchID, Matches.Player1Win,
 Matches.Deck1ID, Player1.Username AS Player_1_Username,
 Matches.Deck2ID, Player2.Username AS Player_2_Username FROM Matches
-INNER JOIN Decks AS Deck1 ON Matches.Deck1ID = Deck1.DeckID
-INNER JOIN Decks AS Deck2 ON Matches.Deck2ID = Deck2.DeckID
-INNER JOIN Players AS Player1 ON Deck1.PlayerID, = Player1.PlayerID
-INNER JOIN Players AS Player2 ON Deck2.PlayerID, = Player2.PlayerID
+LEFT JOIN Decks AS Deck1 ON Matches.Deck1ID = Deck1.DeckID
+LEFT JOIN Decks AS Deck2 ON Matches.Deck2ID = Deck2.DeckID
+LEFT JOIN Players AS Player1 ON Deck1.PlayerID, = Player1.PlayerID
+LEFT JOIN Players AS Player2 ON Deck2.PlayerID, = Player2.PlayerID
 ORDER BY Matches.MatchID;
 
 SELECT Deck_Cards.DeckID, Cards.Name AS Card_Name, Deck_Cards.Qty FROM Deck_Cards

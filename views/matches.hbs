@@ -33,23 +33,23 @@
 </div> <!-- browse -->
 
 <div id="insert">
-    <form method="POST" id="addMatch">
+    <form method="POST" id="add-match-form" action="/add-match">
       <p></p>
         <legend><strong>Add Match</strong></legend>
           <fieldset class="fields">
-            <label> Player 1 Win? </label> <select name="Player1Win">
+            <label> Player 1 Win? </label> <select name="player-1-win-input" id="player-1-win-input">
                 <option value="NULL">&nbsp;</option>
-                <option value="TRUE">TRUE</option>
-                <option value="FALSE">FALSE</option>
+                <option value="1">TRUE</option>
+                <option value="0">FALSE</option>
                 </select>
-            <label> Deck 1 ID </label> <select name="Deck1ID">
+            <label> Deck 1 ID </label> <select name="deck-1-id-input" id="deck-1-id-input">
             	<option value="NULL">&nbsp;</option>
                 <option value="1">1 - Larvene37</option>
                 <option value="2">2 - DistanceShock</option>
                 <option value="3">3 - DistanceShock</option>
                 <option value="4">4 - Reqaz1a</option>
                 </select>
-            <label> Deck 2 ID </label> <select name="Deck2ID">
+            <label> Deck 2 ID </label> <select name="deck-2-id-input" id="deck-2-id-input">
                 <option value="NULL">&nbsp;</option>
                 <option value="1">1 - Larvene37</option>
                 <option value="2">2 - DistanceShock</option>
