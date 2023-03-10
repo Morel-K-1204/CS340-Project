@@ -58,7 +58,7 @@ app.get('/decks', function(req, res)
     });
 app.get('/matches', function(req, res)
     {
-        let query1 = "SELECT Matches.MatchID, Matches.Player1Win, Matches.Deck1ID, Player1.Username AS Player_1_Username, Matches.Deck2ID, Player2.Username AS Player_2_Username FROM Matches INNER JOIN Decks AS Deck1 ON Matches.Deck1ID = Deck1.DeckID INNER JOIN Decks AS Deck2 ON Matches.Deck2ID = Deck2.DeckID INNER JOIN Players AS Player1 ON Deck1.PlayerID = Player1.PlayerID INNER JOIN Players AS Player2 ON Deck2.PlayerID = Player2.PlayerID ORDER BY Matches.MatchID;"
+        let query1 = "SELECT Matches.MatchID, Matches.Player1Win, Matches.Deck1ID, Player1.Username AS Player_1_Username, Matches.Deck2ID, Player2.Username AS Player_2_Username FROM Matches LEFT JOIN Decks AS Deck1 ON Matches.Deck1ID = Deck1.DeckID LEFT JOIN Decks AS Deck2 ON Matches.Deck2ID = Deck2.DeckID LEFT JOIN Players AS Player1 ON Deck1.PlayerID = Player1.PlayerID LEFT JOIN Players AS Player2 ON Deck2.PlayerID = Player2.PlayerID ORDER BY Matches.MatchID;"
 		
 		db.pool.query(query1, function(error, rows, fields)
         {
@@ -112,7 +112,7 @@ app.post('/add-player', function(req, res){
 app.post('/add-deck-card', function(req, res){
     let data = req.body;
 	
-    query1 = `INSERT INTO Deck_Cards(DeckID, CardID, Qty) VALUES(${data['deckid-input']}, ${data['cardid-input']}, ${data['quantity-input']});`
+    query1 = `INSERT INTO Deck_Cards(DeckID, CardID, Qty) VALUES(${data['deck-id-input']}, ${data['card-id-input']}, ${data['quantity-input']});`
     db.pool.query(query1, function(error, rows, fields){
         if (error) {
 			console.log(error)
@@ -121,6 +121,22 @@ app.post('/add-deck-card', function(req, res){
         else
         {
             res.redirect('/deck_cards');
+        }
+    })
+})
+
+app.post('/add-match', function(req, res){
+    let data = req.body;
+	
+    query1 = `INSERT INTO Matches(Player1Win, Deck1ID, Deck2ID) VALUES(${data['player-1-win-input']}, ${data['deck-1-id-input']}, ${data['deck-2-id-input']});`
+    db.pool.query(query1, function(error, rows, fields){
+        if (error) {
+			console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            res.redirect('/matches');
         }
     })
 })
