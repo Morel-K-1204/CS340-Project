@@ -58,11 +58,25 @@ app.get('/decks', function(req, res)
     });
 app.get('/matches', function(req, res)
     {
+        // Query for populating matches table
         let query1 = "SELECT Matches.MatchID, Matches.Player1Win, Matches.Deck1ID, Player1.Username AS Player_1_Username, Matches.Deck2ID, Player2.Username AS Player_2_Username FROM Matches LEFT JOIN Decks AS Deck1 ON Matches.Deck1ID = Deck1.DeckID LEFT JOIN Decks AS Deck2 ON Matches.Deck2ID = Deck2.DeckID LEFT JOIN Players AS Player1 ON Deck1.PlayerID = Player1.PlayerID LEFT JOIN Players AS Player2 ON Deck2.PlayerID = Player2.PlayerID ORDER BY Matches.MatchID;"
+
+        // Query for populating dropdown menus
+        let query2 = "SELECT Decks.DeckID, Players.Username AS Player_Username FROM Decks INNER JOIN Players ON Decks.PlayerID = Players.PlayerID ORDER BY Decks.DeckID;"
 		
-		db.pool.query(query1, function(error, rows, fields)
+		// Run query1
+        db.pool.query(query1, function(error, rows, fields)
         {
-			res.render('matches', {data: rows});
+            // Save the matches from query1
+            let matches = rows;
+
+            // Run query2
+            db.pool.query(query2, (error, rows, fields) => {
+                // Save the decks from query2
+                let decks = rows;
+
+                return res.render('matches', {data: matches, decks: decks});
+            });
         });
     });
 app.get('/deck_cards', function(req, res)
