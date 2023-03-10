@@ -22,6 +22,9 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 /*
     ROUTES
 */
+/*
+    Read operations
+*/
 app.get('/', function(req, res)
     {
         res.render('index');
@@ -71,11 +74,11 @@ app.get('/deck_cards', function(req, res)
 			res.render('deck_cards', {data: rows});
         });
     });
-
+/*
+    Insert operations
+*/
 app.post('/add-card', function(req, res){
     let data = req.body;
-	
-	
 	
     query1 = `INSERT INTO Cards(Name, Description, Power, Health, SpawnCost) VALUES('${data['name-input']}', '${data['description-input']}', ${data['power-input']}, ${data['health-input']}, ${data['cost-input']});`;
     db.pool.query(query1, function(error, rows, fields){
@@ -86,6 +89,22 @@ app.post('/add-card', function(req, res){
         else
         {
             res.redirect('/cards');
+        }
+    })
+})
+
+app.post('/add-player', function(req, res){
+    let data = req.body;
+	
+    query1 = `INSERT INTO Players(Username) VALUES('${data['username-input']}');`
+    db.pool.query(query1, function(error, rows, fields){
+        if (error) {
+			console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            res.redirect('/players');
         }
     })
 })
