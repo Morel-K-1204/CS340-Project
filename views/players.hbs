@@ -29,13 +29,13 @@
 </div> <!-- browse -->
 
 <div id="insert">
-    <form method="POST" id="addPlayer">
+    <form method="POST" id="addPlayer" action="/add-player">
       <p></p>
         <legend><strong>Add Player</strong></legend>
           <fieldset class="fields">
-            <label> Username </label> <input type="text" name="Username">
-      </fieldset>
+            <label> Username </label> <input type="text" name="username-input" id="username-input">
+          </fieldset>
           <input class="btn" type="submit" id="addPlayer" value="Add Player">
-          <input class="btn" type="button" value="cancel" onClick="browsePlayers()">
+          {{!-- <input class="btn" type="button" value="cancel" onClick="browsePlayers()"> --}}
 	</form>
 </div> <!-- insert -->
