@@ -108,6 +108,22 @@ app.post('/add-player', function(req, res){
         }
     })
 })
+
+app.post('/add-deck-card', function(req, res){
+    let data = req.body;
+	
+    query1 = `INSERT INTO Deck_Cards(DeckID, CardID, Qty) VALUES(${data['deckid-input']}, ${data['cardid-input']}, ${data['quantity-input']});`
+    db.pool.query(query1, function(error, rows, fields){
+        if (error) {
+			console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            res.redirect('/deck_cards');
+        }
+    })
+})
 /*
     LISTENER
 */

@@ -40,27 +40,27 @@
 </div> <!-- browse -->
 
 <div id="insert">
-    <form method="POST" id="addDeckCard">
+    <form method="POST" id="add-deck-card-form" action="/add-deck-card">
       <p></p>
         <legend><strong>Add Deck</strong></legend>
           <fieldset class="fields">
-            <label>Deck ID: </label> <select name="DeckID">
-                <option value="0" selected>Select a DeckID...</option>
+            <label>Deck ID: </label> <select name="deckid-input" id="deckid-input">
+                {{!-- <option value="0" selected>Select a DeckID...</option> --}}
                 <option value="1">1 - Larvene37</option>
                 <option value="2">2 - DistanceShock</option>
                 <option value="3">3 - DistanceShock</option>
                 <option value="4">4 - Reqaz1a</option>
             </select>
-            <label>Card ID: </label> <select name="CardID">
-                <option value="0" selected>Select a CardID...</option>
+            <label>Card ID: </label> <select name="cardid-input" id="cardid-input">
+                {{!-- <option value="0" selected>Select a CardID...</option> --}}
                 <option value="1">1 - Spiky Boy</option>
                 <option value="2">2 - Bat</option>
                 <option value="3">3 - Sear Sword</option>
                 <option value="4">4 - Skeleton</option>
             </select>
-            <label> Quantity </label> <input type="number" name="Quantity" value="0" min="0">
+            <label> Quantity </label> <input type="number" name="quantity-input" id="quantity-input" value="0" min="0">
       </fieldset>
-          <input class="btn" type="submit" id="addDeck" value="Add Deck">
-          <input class="btn" type="button" value="cancel" onClick="browseDeckCards()">
+          <input class="btn" type="submit" id="add-deck-card" value="Add Deck_Card">
+          {{!-- <input class="btn" type="button" value="cancel" onClick="browseDeckCards()"> --}}
 	</form> 
 </div><!-- insert -->
