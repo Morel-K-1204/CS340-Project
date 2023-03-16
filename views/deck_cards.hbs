@@ -5,15 +5,19 @@
 <div id="browse">
 <!-- Make this a button?-->
 <p><a href="#" onClick="newDeckCard()">New Deck Card(s)</a></p>
-<p>
-    <label> Filter by Deck ID: </label> <select name="FilterByDeckID">
-        <option value="" selected>Select a DeckID...</option>
-        {{#each}}
+<form method="GET" id="search-by-deck-id-form" action="/deck_cards">
+    <label for="select-FilterByDeckID"> Filter by Deck ID: </label> 
+    <select name="FilterByDeckID" id="FilterByDeckID">
+        <option selected value="">Select a DeckID...</option>
+        {{#each decks}}
         <option value="{{this.DeckID}}">{{this.DeckID}} - {{this.Player_Username}}</option>
         {{/each}}
     </select>
-</p>
 
+    <input type="submit">
+    <a href="/deck_cards"><button>Reset</button></a>
+</form>
+<p></p>
 <table border="1" cellpadding="5">
   <thead>
         <tr>
@@ -26,13 +30,19 @@
     </thead>
 
     <tbody>
-        {{#each data}}
-        <tr>
-            <td>{{this.DeckID}}</td>
-            <td>{{this.Card_Name}}</td>
-			<td>{{this.Qty}}</td>
-        </tr>
-        {{/each}}
+        {{#if data}}
+            {{#each data}}
+            <tr>
+                <td>{{this.DeckID}}</td>
+                <td>{{this.Card_Name}}</td>
+			    <td>{{this.Qty}}</td>
+            </tr>
+            {{/each}}
+        {{else}}
+            <tr>
+                <td>No Cards Found.</td>
+            </tr>
+        {{/if}}
     </tbody>
 </table>
 <p>&nbsp;</p>

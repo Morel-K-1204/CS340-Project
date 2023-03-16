@@ -97,7 +97,17 @@ app.get('/matches', function(req, res)
 app.get('/deck_cards', function(req, res)
     {
         // Query for populating the deck_cards table
-        let query1 = "SELECT Deck_Cards.DeckID, Cards.Name AS Card_Name, Deck_Cards.Qty FROM Deck_Cards INNER JOIN Cards ON Deck_Cards.CardID = Cards.CardID ORDER BY Deck_Cards.DeckID, Deck_Cards.CardID;"
+        let query1;
+        
+        // Case where the user hasn't selected a deck to filter by
+        if(req.query.FilterByDeckID == "" || req.query.FilterByDeckID === undefined) 
+        {
+            query1 = "SELECT Deck_Cards.DeckID, Cards.Name AS Card_Name, Deck_Cards.Qty FROM Deck_Cards INNER JOIN Cards ON Deck_Cards.CardID = Cards.CardID ORDER BY Deck_Cards.DeckID, Deck_Cards.CardID;"
+        }
+        else
+        {
+            query1 = `SELECT Deck_Cards.DeckID, Cards.Name AS Card_Name, Deck_Cards.Qty FROM Deck_Cards INNER JOIN Cards ON Deck_Cards.CardID = Cards.CardID WHERE DeckID = ${req.query.FilterByDeckID} ORDER BY Deck_Cards.CardID;`
+        }
 
         // Query for populating the decks dropdown menu
         let query2 = "SELECT Decks.DeckID, Players.Username AS Player_Username FROM Decks INNER JOIN Players ON Decks.PlayerID = Players.PlayerID ORDER BY Decks.DeckID;"
