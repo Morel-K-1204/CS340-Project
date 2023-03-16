@@ -49,6 +49,7 @@
                 {{/each}}
                 </select>
             <label> Deck 2 ID </label> <select name="deck-2-id-input" id="deck-2-id-input">
+                <option value="NULL">&nbsp;</option>
                 {{#each decks}}
                 <option value="{{this.DeckID}}">{{this.DeckID}} - {{this.Player_Username}}</option>
                 {{/each}}

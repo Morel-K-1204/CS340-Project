@@ -49,11 +49,26 @@ app.get('/players', function(req, res)
     });
 app.get('/decks', function(req, res)
     {
+        // Query for populating decks table
         let query1 = "SELECT Decks.DeckID, Players.Username AS Player_Username FROM Decks INNER JOIN Players ON Decks.PlayerID = Players.PlayerID ORDER BY Decks.DeckID;"
+
+        // Query for populating dropdown menus
+        let query2 = "SELECT * FROM Players ORDER BY PlayerID;"
         
+        // Run query1
         db.pool.query(query1, function(error, rows, fields)
         {
-            res.render('decks', {data: rows});
+            // Save the decks from query1
+            let decks = rows;
+
+            // Run query2
+            db.pool.query(query2, (error, rows, fields) => {
+                // save the players from query2
+                let players = rows;
+
+                return res.render('decks', {data: decks, players:players});
+            })
+
         });
     });
 app.get('/matches', function(req, res)
@@ -81,11 +96,35 @@ app.get('/matches', function(req, res)
     });
 app.get('/deck_cards', function(req, res)
     {
+        // Query for populating the deck_cards table
         let query1 = "SELECT Deck_Cards.DeckID, Cards.Name AS Card_Name, Deck_Cards.Qty FROM Deck_Cards INNER JOIN Cards ON Deck_Cards.CardID = Cards.CardID ORDER BY Deck_Cards.DeckID, Deck_Cards.CardID;"
+
+        // Query for populating the decks dropdown menu
+        let query2 = "SELECT Decks.DeckID, Players.Username AS Player_Username FROM Decks INNER JOIN Players ON Decks.PlayerID = Players.PlayerID ORDER BY Decks.DeckID;"
+
+        // Query for populating the cards dropdown menu
+        let query3 = "SELECT * FROM Cards ORDER BY CardID;"
 		
-		db.pool.query(query1, function(error, rows, fields)
+		// Run query1
+        db.pool.query(query1, function(error, rows, fields)
         {
-			res.render('deck_cards', {data: rows});
+			// Save the deck_cards from query1
+            let deck_cards = rows;
+
+            // Run query2
+            db.pool.query(query2, function(error, rows, fields)
+            {
+                // Save the decks from query2
+                let decks = rows;
+
+                // Run query 3
+                db.pool.query(query3, (error, rows, fields) => {
+                    // Save the cards from query3
+                    let cards = rows;
+
+                    res.render('deck_cards', {data: deck_cards, decks: decks, cards: cards});
+                })
+            })
         });
     });
 /*
