@@ -20,7 +20,18 @@
         {{#each data}}
         <tr>
             <td>{{this.MatchID}}</td>
-            <td>{{this.Player1Win}}</td>
+            {{!-- Render an empty cell only if the row's Player1Win value is NULL --}}
+            {{#unless this.Player1Win includeZero=true}}
+            <td></td>
+            {{else}}
+                {{!-- Render "TRUE" if the row's Player1Win value is 1 --}}
+                {{#if this.Player1Win}}
+                <td>TRUE</td>
+                {{!-- Render "FALSE if the row's Player1Win value is 0 --}}
+                {{else}}
+                <td>FALSE</td>
+                {{/if}}
+            {{/unless}}
 			<td>{{this.Deck1ID}}</td>
 			<td>{{this.Player_1_Username}}</td>
 			<td>{{this.Deck2ID}}</td>
