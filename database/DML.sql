@@ -27,7 +27,7 @@ SELECT Deck_Cards.DeckID, Cards.Name AS Card_Name, Deck_Cards.Qty FROM Deck_Card
 INNER JOIN Cards ON Deck_Cards.CardID = Cards.CardID
 ORDER BY Deck_Cards.DeckID, Deck_Cards.CardID;
 
-SELECT Cards.Name, Deck_Cards.Qty FROM Deck_Cards
+SELECT Deck_Cards.DeckID, Cards.Name AS Card_Name, Deck_Cards.Qty FROM Deck_Cards
 INNER JOIN Cards ON Deck_Cards.CardID = Cards.CardID
 WHERE DeckID = $DeckIDInput
 ORDER BY Deck_Cards.CardID;

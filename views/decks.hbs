@@ -41,12 +41,11 @@
         <legend><strong>Add Deck</strong></legend>
           <fieldset class="fields">
             <label> Player ID </label> <select name="PlayerID" id="player-input">
-            	<option value="0" selected>Select a player...</option>
-                <option value="1">1 - Larvene37</option>
-                <option value="2">2 - DistanceShock</option>
-                <option value="3">3 - Voidance</option>
-                <option value="4">4 - Reqaz1a</option>
-                </select>
+            	<option value="" selected>Select a player...</option>
+              {{#each players}}
+              <option value="{{this.PlayerID}}">{{this.PlayerID}} - {{this.Username}}</option>
+              {{/each}}  
+            </select>
       </fieldset>
           <input class="btn" type="submit" id="addDeck" value="Add Deck">
           <input class="btn" type="button" value="cancel" onClick="browseDecks()">
