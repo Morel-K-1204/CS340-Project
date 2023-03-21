@@ -5,7 +5,7 @@
 <div id="browse">
 <!-- Make this a button?-->
 <p><a href="#" onClick="newDeck()">New Deck</a></p>
-<table border="1" cellpadding="5">
+<table border="1" cellpadding="5" id="deck-table">
     {{!-- Header section --}}
     <thead>
 
@@ -17,6 +17,7 @@
                 {{@key}}
             </th>
             {{/each}}
+			<th>Delete</th>
         </tr>
     </thead>
 
@@ -25,13 +26,15 @@
 
         {{!-- For each row, print the id and username --}}
         {{#each data}}
-        <tr>
+        <tr data-value={{this.DeckID}}>
             <td>{{this.DeckID}}</td>
             <td>{{this.Player_Username}}</td>
+			<td><button onclick="deleteDeck({{this.DeckID}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+<script src="./js/delete_deck.js"></script>
 <p>&nbsp;</p>
 </div> <!-- browse -->
 
@@ -51,18 +54,3 @@
           <input class="btn" type="button" value="cancel" onClick="browseDecks()">
 	</form> 
 </div><!-- insert -->
-
-<div id="delete" style="display: block">
-  <form method="POST" id="deleteDeck">
-    <p></p>
-      <legend><strong>Delete Deck</strong></legend>
-          <fieldset class="fields">
-          <p>Are you sure you wish to delete the following?</p>
-          <input type="hidden" name="DeckID" id="deleteDeckID" value="3">
-          <label><strong>DeckID:</strong></label> 3
-          <label><strong>Player Username:</strong></label> DistanceShock
-    </fieldset>
-    <input class="btn" type="submit" id="DeleteDeck" value="Delete Deck">
-          <input class="btn" type="button" value="cancel" onClick="browseDecks()">
-  </form> 
-</div><!-- delete -->
