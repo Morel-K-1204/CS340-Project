@@ -220,6 +220,24 @@ app.post('/add-match', function(req, res){
     })
 })
 /*
+    Delete operations
+*/
+app.delete('/delete-deck-ajax/', function(req,res,next){
+  let data = req.body;
+  let deckID = parseInt(data.id);
+  let deleteDeck = `DELETE FROM Decks WHERE DeckID = ?;`;
+
+	db.pool.query(deleteDeck, [deckID], function(error, rows, fields) {
+		if (error) {
+			console.log(error);
+			res.sendStatus(400);
+		} else {
+			res.sendStatus(204);
+		}
+	})
+});
+
+/*
     LISTENER
 */
 app.listen(PORT, function(){
