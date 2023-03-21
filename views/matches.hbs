@@ -5,7 +5,7 @@
 <div id="browse">
 <!-- Make this a button?-->
 <p><a href="#" onClick="newMatch()">New Match</a></p>
-<table border="1" cellpadding="5">
+<table border="1" cellpadding="5" id="match-table">
     <thead>
         <tr>
             {{#each data.[0]}}
@@ -18,7 +18,7 @@
 
     <tbody>
         {{#each data}}
-        <tr>
+        <tr data-value={{this.MatchID}}>
             <td>{{this.MatchID}}</td>
             {{!-- Render an empty cell only if the row's Player1Win value is NULL --}}
             {{#unless this.Player1Win includeZero=true}}
@@ -73,33 +73,34 @@
 <p>&nbsp;</p>
 
 <div id="update">
-    <form method="POST" id="updateMatch">
+    <form id="update-match-form">
       <p></p>
         <legend><strong>Update Match</strong></legend>
           <fieldset class="fields">
-          <input type="hidden" name="MatchID" id="updateMatchID" value="1">
-          <label> Match ID: </label> 1 </br>
-          <label> Player 1 Win? </label> <select name="Player1Win">
+          <label> Match ID </label> <select name="match-id-update" id="match-id-update">
+                {{#each data}}
+                <option value="{{this.MatchID}}">{{this.MatchID}}</option>
+                {{/each}}
+                </select>
+          <label> Player 1 Win? </label> <select name="Player1WinUpdate" id="player-win-update">
             <option value="NULL">&nbsp;</option>
-            <option value="TRUE" selected>TRUE</option>
-            <option value="FALSE">FALSE</option>
+            <option value="1" selected>TRUE</option>
+            <option value="0">FALSE</option>
             </select>
-          <label> Deck 1 ID </label> <select name="Deck1ID">
-              <option value="0">&nbsp;</option>
-              <option value="1">1 - Larvene37</option>
-              <option value="2">2 - DistanceShock</option>
-              <option value="3" selected>3 - DistanceShock</option>
-              <option value="4">4 - Reqaz1a</option>
-              </select>
-          <label> Deck 2 ID </label> <select name="Deck2ID">
-              <option value="0">&nbsp;</option>
-              <option value="1" selected>1 - Larvene37</option>
-              <option value="2">2 - DistanceShock</option>
-              <option value="3">3 - DistanceShock</option>
-              <option value="4">4 - Reqaz1a</option>
-              </select>
+          <label> Deck 1 ID </label> <select name="deck-1-id-update" id="deck-1-id-update">
+            	<option value="NULL">&nbsp;</option>
+                {{#each decks}}
+                <option value="{{this.DeckID}}">{{this.DeckID}} - {{this.Player_Username}}</option>
+                {{/each}}
+                </select>
+          <label> Deck 2 ID </label> <select name="deck-2-id-update" id="deck-2-id-update">
+                <option value="NULL">&nbsp;</option>
+                {{#each decks}}
+                <option value="{{this.DeckID}}">{{this.DeckID}} - {{this.Player_Username}}</option>
+                {{/each}}
+                </select>
       </fieldset>
-          <input class="btn" type="submit" id="UpdateSaveMatch" value="Save Match">
-          <input class="btn" type="button" value="cancel" onClick="browseMatches()">
+          <input type="submit">
 	</form> 
+	<script src="./js/update_match.js"></script>
 </div><!-- update -->
