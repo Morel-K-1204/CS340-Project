@@ -236,6 +236,45 @@ app.delete('/delete-deck-ajax/', function(req,res,next){
 		}
 	})
 });
+/*
+    Update operations
+*/
+app.put('/put-match', function(req,res,next){
+  let data = req.body;
+
+  let id = parseInt(data.id);
+  let winner = parseInt(data.winner);
+  let deck1 = parseInt(data.deck1);
+  let deck2 = parseInt(data.deck2);
+
+  let queryUpdateMatch = `UPDATE Matches SET Player1Win = ?, Deck1ID = ?, Deck2ID = ? WHERE MatchID = ?;`;
+  let selectMatch = `SELECT Matches.MatchID, Matches.Player1Win, Matches.Deck1ID, Player1.Username AS Player_1_Username, Matches.Deck2ID, Player2.Username AS Player_2_Username FROM Matches INNER JOIN Decks AS Deck1 ON Matches.Deck1ID = Deck1.DeckID INNER JOIN Decks AS Deck2 ON Matches.Deck2ID = Deck2.DeckID INNER JOIN Players AS Player1 ON Deck1.PlayerID = Player1.PlayerID INNER JOIN Players AS Player2 ON Deck2.PlayerID = Player2.PlayerID ORDER BY Matches.MatchID WHERE id = ?`
+
+        // Run the 1st query
+        db.pool.query(queryUpdateMatch, [winner, deck1, deck2, id], function(error, rows, fields){
+            if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+            }
+
+            // If there was no error, we run our second query and return that data so we can use it to update the people's
+            // table on the front-end
+            else
+            {
+                // Run the second query
+                db.pool.query(selectMatch, [id], function(error, rows, fields) {
+
+                    if (error) {
+                        console.log(error);
+                        res.sendStatus(400);
+                    } else {
+                        res.send(rows);
+                    }
+                })
+            }
+})});
 
 /*
     LISTENER
